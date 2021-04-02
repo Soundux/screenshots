@@ -1,0 +1,23 @@
+{
+  "name": "soundux-screenshots",
+  "description": "Automatically create screenshots of the Soundux UI",
+  "version": "1.0.0",
+  "repository": "github:Soundux/screenshots",
+  "bugs": "https://github.com/Soundux/Soundux/issues",
+  "homepage": "https://soundux.rocks",
+  "license": "GPL-3.0-or-later",
+  "main": "src/screenshot.js",
+  "scripts": {
+    "start": "node .",
+    "lint": "eslint --ext \".js,.ts,.vue\" --ignore-path .gitignore ."
+  },
+  "dependencies": {
+    "puppeteer": "^8.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.23.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "prettier": "^2.2.1"
+  }
+}
