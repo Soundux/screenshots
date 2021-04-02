@@ -46,7 +46,7 @@ jobs:
         run: git clone https://github.com/Soundux/soundux-ui dist && cd dist && git checkout build
 
       - name: Create screenhots 👀
-        run: yarn start
+        run: yarn start && ls -lah && ls -lah dist && ls -lah screenshots
 
       - name: Upload screenshots 🚀
         uses: s0/git-publish-subdir-action@v2.4.0
