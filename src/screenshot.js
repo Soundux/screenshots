@@ -98,7 +98,7 @@ const start = async () => {
   const ss = async name => {
     console.debug(`Taking screenshot ${name}...`);
     await page.screenshot({
-      path: `./screenshots/screenshot-${name}.png`,
+      path: `./screenshots/${name}.png`,
     });
   };
 
@@ -137,8 +137,10 @@ const start = async () => {
     animation-play-state: paused !important;
     caret-color: transparent !important;
     color-adjust: exact !important;
+    transition: none !important;
 }`,
   });
+  await page.waitForTimeout(1000);
 
   // screenshot home
   await ssThemed('home');

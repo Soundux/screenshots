@@ -54,5 +54,6 @@ jobs:
           REPO: self
           BRANCH: screenshots
           FOLDER: screenshots
+          SQUASH_HISTORY: true
           MESSAGE: "Update screenshots"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
