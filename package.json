@@ -7,11 +7,13 @@
   "homepage": "https://soundux.rocks",
   "license": "GPL-3.0-or-later",
   "main": "src/screenshot.js",
+  "type": "module",
   "scripts": {
     "start": "node .",
-    "lint": "eslint --ext \".js,.ts,.vue\" --ignore-path .gitignore ."
+    "lint": "eslint --ext \".js\" --ignore-path .gitignore ."
   },
   "dependencies": {
+    "markdown-table": "^3.0.0",
     "puppeteer": "^8.0.0"
   },
   "devDependencies": {
