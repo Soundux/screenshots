@@ -7,4 +7,4 @@
 [![Build](https://img.shields.io/github/workflow/status/Soundux/screenshots/ci?&style=for-the-badge)](https://github.com/Soundux/screenshots/actions?query=workflow%3A%22ci%22)
 
 ### Tech stack
-[![Puppeteer](https://img.shields.io/badge/Puppeteer-40B5A4?style=for-the-badge&logo=puppeteer&logoColor=fff)](https://vuejs.org/)
+[![Puppeteer](https://img.shields.io/badge/Puppeteer-40B5A4?style=for-the-badge&logo=puppeteer&logoColor=fff)](https://pptr.dev/)
