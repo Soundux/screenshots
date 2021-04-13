@@ -188,6 +188,11 @@ try {
   await ssThemed('grid-view');
   await commit('setGridView', false);
 
+  // screenshot launchpad view
+  await commit('setLaunchpadMode', true);
+  await ssThemed('launchpad-view');
+  await commit('setLaunchpadMode', false);
+
   // screenshot settings
   await clickButton('Settings');
   await ssThemed('settings');
