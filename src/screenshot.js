@@ -55,7 +55,7 @@ try {
     const tabs = [];
     for (let i = 1; i < 6; i++) {
       const tab = { id: i, name: `Tab ${i}`, sounds: [] };
-      for (let j = 1; j < 20; j++) {
+      for (let j = 1; j < 29; j++) {
         tab.sounds.push({
           id: j,
           name: `Example Sound ${j}`,
