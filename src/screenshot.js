@@ -35,13 +35,12 @@ try {
       output: output.name,
       selectedTab: 0,
       allowOverlapping: true,
-      darkTheme: true,
+      theme: 1,
+      viewMode: 0,
       stopHotkey: [],
       pushToTalkKeys: [],
       sortMode: 1,
       tabHotkeysOnly: false,
-      launchPadMode: false,
-      gridView: false,
       minimizeToTray: false,
       localVolume: 0.5,
       remoteVolume: 1.0,
@@ -159,9 +158,9 @@ try {
 
   const ssThemed = async (name, element) => {
     await ss(`${name}-dark`, element);
-    await commit('setDarkTheme', false);
+    await commit('setTheme', 2);
     await ss(`${name}-light`, element);
-    await commit('setDarkTheme', true);
+    await commit('setTheme', 1);
   };
 
   // disable animations for screenshots
@@ -184,14 +183,14 @@ try {
   await ssThemed('home');
 
   // screenshot grid view
-  await commit('setGridView', true);
+  await commit('setViewMode', 1);
   await ssThemed('grid-view');
-  await commit('setGridView', false);
+  await commit('setViewMode', 0);
 
   // screenshot launchpad view
-  await commit('setLaunchpadMode', true);
+  await commit('setViewMode', 2);
   await ssThemed('launchpad-view');
-  await commit('setLaunchpadMode', false);
+  await commit('setViewMode', 0);
 
   // screenshot settings
   await clickButton('Settings');
