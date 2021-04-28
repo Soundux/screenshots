@@ -35,6 +35,8 @@ try {
       output: output.name,
       selectedTab: 0,
       allowOverlapping: true,
+      deleteToTrash: true,
+      syncVolumes: false,
       theme: 1,
       viewMode: 0,
       stopHotkey: [],
