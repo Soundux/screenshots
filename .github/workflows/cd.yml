@@ -49,7 +49,7 @@ jobs:
         run: yarn start
 
       - name: Upload screenshots 🚀
-        uses: s0/git-publish-subdir-action@v2.4.0
+        uses: s0/git-publish-subdir-action@v2.4.1
         env:
           REPO: self
           BRANCH: screenshots
