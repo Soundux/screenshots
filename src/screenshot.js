@@ -38,6 +38,7 @@ try {
       deleteToTrash: true,
       syncVolumes: false,
       theme: 1,
+      audioBackend: 0,
       viewMode: 0,
       stopHotkey: [],
       pushToTalkKeys: [],
