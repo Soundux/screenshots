@@ -42,7 +42,6 @@ try {
       viewMode: 0,
       stopHotkey: [],
       pushToTalkKeys: [],
-      sortMode: 1,
       tabHotkeysOnly: false,
       minimizeToTray: false,
       localVolume: 50,
@@ -57,7 +56,7 @@ try {
   await page.exposeFunction('getTabs', () => {
     const tabs = [];
     for (let i = 1; i < 6; i++) {
-      const tab = { id: i, name: `Tab ${i}`, sounds: [] };
+      const tab = { id: i, name: `Tab ${i}`, sounds: [], sortMode: 1 };
       for (let j = 1; j < 29; j++) {
         tab.sounds.push({
           id: j,
