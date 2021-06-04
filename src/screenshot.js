@@ -65,6 +65,8 @@ try {
           modifiedDate: 0,
           hotkeys: [],
           hotkeySequence: '',
+          localVolume: null,
+          remoteVolume: null,
         });
       }
       tabs.push(tab);
