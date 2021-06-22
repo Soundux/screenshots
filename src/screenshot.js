@@ -8,7 +8,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const [width, height] = [1360, 795];
 const output = {
-  name: 'DiscordCanary',
+  application: 'DiscordCanary',
   appIcon:
     'iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAABNtJREFUWIWtl11sVFUQgL+5u3tZSMvSPwgVYUPaEksDRSCGPzWFoKUS8QFSTUiMIb6R+CYk+KIkakw0kUej8YEoiH9oKQloiQYBY5AqUuK2CQvyE9sulLbQ7f7c8eFuu/fu3ls2lUkm956ZOTNzZs6ZM0coEdLHN0eANqAFaAaJAnNy7CHQONANdAHHQq0n7paiVx4kkOrcVC8ie4F2IFyiv0ngEPBOqPVkbFoOpDo3zgT2C7IbCJZoeBLUVp4BDgD7Qlt+GCvZgVRnS73AN0BjgcLJ7wStUIkXDegBtoW2dPU90IH0sadXKHJCoMqp0DnB6Uwh3am0gJ8ANofaTl3wdSDV8VSdCGdVbeOekLMkAurliVM0x9P83IQoa0PP/dRb5ECq48mZwG8CjT76Hhb0oKw2t/48BmBMklX3o9qoatlL88RC3lSyvvKNoG+5IpD6bl0Dwl9MsdvFrEDmrUMql6M3f8QaOOfiG3PXILUtaOIPtP8MOn57qihkgKXm1l96cwZ1D+ptXEJlGM37kLlrRYyALV2zCiOZUELlgArpUQhXI+FqWNCKWlm0/6xa3W+i6XteaoPAXuAVSR19IoLILXyKTGDZ6xiLtj2wYHmBFf9asxff82MngfkG0IZq2CuHUhZFFm6dlnEAWfS8SFnUb4+EUW0zUKvF3hwOxEajbicigenaRySAUbczr9P5tbHFAG22T6oDVZFgGVK7cdqrn3SidpMQKs8VDc1/bWw2UCvqPib20ZF565HADJcyTQ5qtu+gWoO/F5UKK9GtVt9B1eSA24GAiTFvHUVRtjEaBJ1TXMoUqV7lpqhF9vSr6GgcxEA2fKpS2SQAeueSZk/vArWQ+Fca2PilOFMnNavgnw6vAM0x/IqIRBrcoskB1ZErNt/KYiXO550bPA9WFlTRkTgkB10rktkNvsXKAGtoYtO5cNZ8d/7DNSLlUZsnIFUr8waqV+YKv4WULYRwjXvurPniaQNrKIhqHKgsCk6o3DUUMQis/wjr+nGkogkjF34AqVgqgQ2fKLcvIo8+KyJGsS71vGHiQbAuAI97cQtBwtUSqNvpyTOqmoWqZp+Zir3iInK3geopz/yM9btlR66ode171cyY72WpmXtqXT2qOnrNzRjrV08baJekjjwWAS0uxTPnEli+F+ORZ8TOr33Usmd3I+WLkdl1MCOXufHb6HAfOhonuOYAUrnMPh2q6PVOzf75LowNFPYOY0Bt0Nx++W7qyJJDwMtur/8le+41rIomNZbssovS/ZuQHECTA+jAr95RuH8LIktUb5zEin2MDl12htwJh83tf9+1r+MvGuqBS7iuY2f3B5gR0CykR4t5TvlQmT1MjxTIuLrJDEiTuSMWMwDMHbFesD50HxHFNU7dgfSwN89JSw/n5AplnGM9YO6IxcDdEb2Bas/UHc5DwR7QfRNm3U3p4cX1oGdgiqa0FPDKkA0JlDVm+5XJ9rxIbPxQdIXAif/thJdx2Gy2x/3b8rwTi+oE/Ral0fc1UqhFPf7zAj0IL5jtV3sLOUYhAWBG+9U+VVaDfoBqZvIed9/leVSffzQD+r6iq72M+0bACanPFzSoskfQ3OPU7yXiCoP9OBXeNl+87mm4ZAcmYPyz2oi4nudEcT3PiQPdIF1Ah/nSjeFS9P4HpTPX9LwQ4pMAAAAASUVORK5CYII=',
 };
@@ -20,12 +20,12 @@ try {
   const page = await browser.newPage();
 
   // console output
-  page.on('console', msg => console.log(msg.text()));
+  page.on('console', msg => console.log('console:', msg.text()));
   page.on('pageerror', error => {
-    console.error(error.message);
+    console.error('pageerror:', error);
   });
   page.on('requestfailed', request => {
-    console.error(request.failure().errorText, request.url());
+    console.error('requestfailed:', request.failure().errorText, request.url());
   });
 
   // mock backend functions
@@ -42,6 +42,8 @@ try {
       viewMode: 0,
       stopHotkey: [],
       pushToTalkKeys: [],
+      localVolumeKnob: null,
+      remoteVolumeKnob: null,
       tabHotkeysOnly: false,
       minimizeToTray: false,
       localVolume: 50,
@@ -52,6 +54,7 @@ try {
     };
   });
   await page.exposeFunction('changeSettings', () => {});
+  await page.exposeFunction('getKeyName', () => '');
   await page.exposeFunction('isLinux', () => true);
   await page.exposeFunction('getTabs', () => {
     const tabs = [];
@@ -128,8 +131,8 @@ try {
   };
 
   const clickButton = async text => {
-    const settingsButton = await page.waitForXPath(`//button[contains(span, '${text}')]`);
-    await settingsButton.click();
+    const button = await page.waitForXPath(`//button[contains(span, '${text}')]`);
+    await button.click();
   };
 
   const commit = async (action, ...args) => {
