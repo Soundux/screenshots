@@ -214,17 +214,19 @@ try {
   await clickButton('Search');
   const searchField = await page.waitForSelector('#searchField');
   await searchField.type('Example');
+  await page.waitForTimeout(200);
   await ssThemed('search');
   await page.keyboard.press('Escape');
   await page.waitForTimeout(500);
 
   // screenshot pass through
   await clickButton('Pass through');
-  await ssThemed('pass-through');
   const passThroughDrawer = await page.waitForSelector('aside');
+  await page.waitForTimeout(500);
+  await ssThemed('pass-through');
   await ssThemed('pass-through-drawer', passThroughDrawer);
   await page.keyboard.press('Escape');
-  await clickButton('Pass through');
+  await page.waitForTimeout(500);
 
   // screenshot playing sound
   await addPlaying(1, 5000);
@@ -259,8 +261,8 @@ try {
   // close browser
   await page.close();
   await browser.close();
+  console.log('Successfully generated screenshots');
 } catch (error) {
-  console.error(error);
+  console.error('Error creating screenshots', error);
+  process.exit(1);
 }
-
-console.log('Successfully generated screenshots');
