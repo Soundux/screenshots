@@ -222,10 +222,10 @@ try {
   // screenshot pass through
   await clickButton('Pass through');
   const passThroughDrawer = await page.waitForSelector('aside');
-  await page.waitForTimeout(500);
+  await page.waitForTimeout(200);
   await ssThemed('pass-through');
   await ssThemed('pass-through-drawer', passThroughDrawer);
-  await page.keyboard.press('Escape');
+  await clickButton('Pass through');
   await page.waitForTimeout(500);
 
   // screenshot playing sound
