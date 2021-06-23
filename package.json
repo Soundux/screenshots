@@ -13,7 +13,7 @@
     "lint": "eslint --ext \".js\" --ignore-path .gitignore ."
   },
   "dependencies": {
-    "markdown-table": "^3.0.0",
+    "markdown-table": "^3.0.1",
     "puppeteer": "^10.0.0"
   },
   "devDependencies": {
